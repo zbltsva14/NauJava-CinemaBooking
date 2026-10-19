@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: NauJava
+
+app:
+  name: "Система бронирования билетов для кинотеатра"
+  version: "1.0.0"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
