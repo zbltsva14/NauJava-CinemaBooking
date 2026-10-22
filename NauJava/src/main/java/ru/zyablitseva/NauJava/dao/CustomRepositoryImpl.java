@@ -33,7 +33,6 @@ public class CustomRepositoryImpl implements CustomRepository {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
         Root<Movie> movieRoot = cq.from(Movie.class);
-
         List<Predicate> predicates = new ArrayList<>();
         if (genre != null && !genre.isEmpty()) {
             predicates.add(cb.equal(movieRoot.get("genre"), genre));
@@ -41,7 +40,6 @@ public class CustomRepositoryImpl implements CustomRepository {
         if (ageRating != null && !ageRating.isEmpty()) {
             predicates.add(cb.equal(movieRoot.get("ageRating"), ageRating));
         }
-
         cq.select(movieRoot).where(predicates.toArray(new Predicate[0]));
         return entityManager.createQuery(cq).getResultList();
     }
@@ -51,13 +49,9 @@ public class CustomRepositoryImpl implements CustomRepository {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Session> cq = cb.createQuery(Session.class);
         Root<Session> sessionRoot = cq.from(Session.class);
-
-        // Делаем JOIN с сущностью Movie
         Join<Session, Movie> movieJoin = sessionRoot.join("movie", JoinType.INNER);
-
         Predicate titlePredicate = cb.equal(movieJoin.get("title"), movieTitle);
         cq.select(sessionRoot).where(titlePredicate);
-
         return entityManager.createQuery(cq).getResultList();
     }
 }
