@@ -2,6 +2,22 @@ spring:
   application:
     name: NauJava
 
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: lina
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+    open-in-view: false
+
 app:
   name: "Система бронирования билетов для кинотеатра"
   version: "1.0.0"
