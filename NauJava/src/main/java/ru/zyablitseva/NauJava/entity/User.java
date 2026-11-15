@@ -1,6 +1,7 @@
 package ru.zyablitseva.NauJava.entity;
 
-
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +31,10 @@ public class User {
 
     private String email;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role = Role.USER;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 
@@ -45,4 +50,6 @@ public class User {
     public void setEmail(String email) { this.email = email; }
     public List<Ticket> getTickets() { return tickets; }
     public void setTickets(List<Ticket> tickets) { this.tickets = tickets; }
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
 }

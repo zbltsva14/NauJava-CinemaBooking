@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список фильмов</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; max-width: 1000px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .desc { max-width: 300px; }
+    </style>
+</head>
+<body>
+<div style="margin-bottom: 15px;">
+    <span>Вы вошли как: <b th:text="${#authentication.name}">user</b></span>
+    <form th:action="@{/logout}" method="post" style="display: inline;">
+        <input type="submit" value="Выйти"/>
+    </form>
+</div>
+
+<h1>Список фильмов в кинотеатре</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Жанр</th>
+        <th>Длительность (мин)</th>
+        <th>Рейтинг</th>
+        <th>Описание</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="movie : ${movies}">
+        <td th:text="${movie.id}">1</td>
+        <td th:text="${movie.title}">Название</td>
+        <td th:text="${movie.genre}">Жанр</td>
+        <td th:text="${movie.durationMinutes}">120</td>
+        <td th:text="${movie.ageRating}">16+</td>
+        <td class="desc" th:text="${movie.description}">Описание...</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
